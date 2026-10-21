@@ -26,6 +26,21 @@ body {
 	font-family: 'DM Sans', sans-serif;
 }
 
+.skip-link {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 12px 18px;
+	color: var(--night);
+	background: var(--lime);
+	transform: translateY(-120%);
+	z-index: 10;
+}
+
+.skip-link:focus {
+	transform: translateY(0);
+}
+
 .hero {
 	min-height: 570px;
 	padding: 56px 8% 70px;
@@ -42,7 +57,7 @@ body {
 	font-weight: 700;
 	letter-spacing: .2em;
 	position: absolute;
-	right: 8%;
+	inset-inline-end: 8%;
 	top: 58px;
 	transform: rotate(90deg);
 }
@@ -53,9 +68,31 @@ body {
 	z-index: 1;
 }
 
+.language-control {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 42px;
+	color: var(--mist);
+	font-size: .85rem;
+}
+
+.language-control select,
+.newsletter-form input {
+	font: inherit;
+}
+
+.language-control select {
+	padding: 8px 10px;
+	color: var(--white);
+	background: var(--panel);
+	border: 1px solid rgba(203, 228, 232, .45);
+	border-radius: 2px;
+}
+
 .intel-logo {
 	width: 100px;
-	margin-bottom: 74px;
+	margin-bottom: 32px;
 	filter: brightness(0) invert(1);
 }
 
@@ -97,12 +134,12 @@ h1 {
 .hero-stats div {
 	min-width: 150px;
 	padding: 0 22px;
-	border-left: 1px solid rgba(203, 228, 232, .35);
+	border-inline-start: 1px solid rgba(203, 228, 232, .35);
 }
 
 .hero-stats div:first-child {
-	padding-left: 0;
-	border-left: 0;
+	padding-inline-start: 0;
+	border-inline-start: 0;
 }
 
 .hero-stats strong,
@@ -158,6 +195,10 @@ h1 {
 	scrollbar-color: var(--cyan) var(--panel);
 }
 
+html[dir='rtl'] .timeline {
+	direction: rtl;
+}
+
 .timeline::before {
 	content: '';
 	height: 1px;
@@ -186,6 +227,7 @@ h1 {
 }
 
 .timeline-card:hover,
+.timeline-card:focus,
 .timeline-card:focus-within {
 	transform: translateY(-10px);
 	border-color: var(--cyan);
@@ -195,14 +237,14 @@ h1 {
 .timeline-card img {
 	width: calc(100% + 40px);
 	height: 132px;
-	margin-left: -20px;
+	margin-inline: -20px;
 	object-fit: cover;
 	display: block;
 	filter: grayscale(.25) saturate(1.1) contrast(1.05);
 	border-bottom: 1px solid rgba(0, 212, 255, .35);
 }
 
-.timeline-card h2 {
+.timeline-year {
 	margin: 22px 0 4px;
 	color: var(--lime);
 	font-size: 1.8rem;
@@ -244,6 +286,147 @@ footer span {
 	color: var(--cyan);
 }
 
+.newsletter-section {
+	display: flex;
+	justify-content: space-between;
+	gap: 60px;
+	padding: 72px 8% 86px;
+	background: var(--panel);
+}
+
+.accordion-section {
+	padding: 72px 8% 80px;
+	background: #09232e;
+}
+
+.accordion-section .section-heading {
+	margin-inline: 0;
+}
+
+.accordion {
+	max-width: 900px;
+}
+
+.accordion-item {
+	color: var(--mist);
+	background: var(--panel);
+	border-color: rgba(134, 167, 176, .3);
+}
+
+.accordion-button {
+	color: var(--white);
+	background: var(--panel-light);
+	font-weight: 700;
+}
+
+.accordion-button:not(.collapsed) {
+	color: var(--night);
+	background: var(--lime);
+	box-shadow: none;
+}
+
+.accordion-button:focus {
+	box-shadow: 0 0 0 3px var(--cyan);
+}
+
+.accordion-button::after {
+	filter: brightness(0) invert(1);
+}
+
+.accordion-button:not(.collapsed)::after {
+	filter: none;
+}
+
+.newsletter-copy,
+.newsletter-form {
+	width: 50%;
+}
+
+.newsletter-copy h2 {
+	max-width: 520px;
+	margin: 0 0 12px;
+	color: var(--white);
+	font-size: clamp(2rem, 4vw, 3.5rem);
+	line-height: 1.05;
+}
+
+.newsletter-copy > p:last-child {
+	color: var(--muted);
+	line-height: 1.6;
+}
+
+.newsletter-form {
+	max-width: 500px;
+}
+
+.form-field label,
+.consent-label {
+	display: block;
+	color: var(--white);
+	font-weight: 700;
+}
+
+.newsletter-form input[type='email'] {
+	display: block;
+	width: 100%;
+	margin-top: 8px;
+	padding: 13px 14px;
+	color: var(--white);
+	background: var(--night);
+	border: 1px solid var(--muted);
+	border-radius: 2px;
+}
+
+.newsletter-form input:focus,
+.newsletter-form button:focus,
+.language-control select:focus {
+	outline: 3px solid var(--lime);
+	outline-offset: 3px;
+}
+
+.form-field p {
+	margin: 8px 0 20px;
+	color: var(--muted);
+	font-size: .85rem;
+}
+
+.consent-label {
+	display: flex;
+	gap: 10px;
+	align-items: flex-start;
+	font-size: .9rem;
+	line-height: 1.4;
+}
+
+.consent-label input {
+	width: 18px;
+	height: 18px;
+	accent-color: var(--lime);
+}
+
+.newsletter-form button {
+	margin-top: 24px;
+	padding: 13px 18px;
+	color: var(--night);
+	background: var(--lime);
+	border: 0;
+	border-radius: 2px;
+	font: inherit;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.newsletter-form button:hover {
+	background: var(--cyan);
+}
+
+.form-status {
+	min-height: 1.5em;
+	margin: 18px 0 0;
+	color: var(--lime);
+	font-weight: 700;
+}
+
 @media (max-width: 700px) {
 	.hero {
 		min-height: 520px;
@@ -251,7 +434,7 @@ footer span {
 	}
 
 	.intel-logo {
-		margin-bottom: 58px;
+		margin-bottom: 32px;
 	}
 
 	.timeline-section {
@@ -266,8 +449,8 @@ footer span {
 	.timeline::before {
 		top: 0;
 		bottom: 0;
-		left: 7%;
-		right: auto;
+		inset-inline-start: 7%;
+		inset-inline-end: auto;
 		width: 1px;
 		height: auto;
 		background: linear-gradient(var(--cyan), var(--lime));
@@ -305,6 +488,44 @@ footer span {
 		max-height: 180px;
 		margin-top: 14px;
 		opacity: 1;
+	}
+
+	.newsletter-section {
+		display: block;
+		padding: 58px 8% 68px;
+	}
+
+	.accordion-section {
+		padding: 58px 8% 68px;
+	}
+
+	.newsletter-copy,
+	.newsletter-form {
+		width: 100%;
+	}
+
+	.newsletter-form {
+		margin-top: 36px;
+	}
+}
+
+html[dir='rtl'] .hero-stats div {
+	padding-inline: 22px;
+}
+
+html[dir='rtl'] .hero-stats div:first-child {
+	padding-inline-end: 0;
+}
+
+html[dir='rtl'] .timeline::before {
+	inset-inline-start: 8%;
+	inset-inline-end: 8%;
+}
+
+@media (max-width: 700px) {
+	html[dir='rtl'] .timeline::before {
+	 inset-inline-start: auto;
+	 inset-inline-end: 7%;
 	}
 }
 
